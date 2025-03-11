@@ -1,0 +1,100 @@
+---
+const services = [
+  {
+    title: "Süni İntellekt Məsləhətləşməsi",
+    description: "Biznesinizin ehtiyaclarına uyğun süni intellekt həllərinin tətbiqi üçün strateji təlimat.",
+    icon: "💡"
+  },
+  {
+    title: "Maşın Öyrənməsi Həlləri",
+    description: "Biznesiniz üçün məlumatları təhlil etmək və faydalı məlumatlar təqdim etmək üçün xüsusi ML modelləri.",
+    icon: "🧠"
+  },
+  {
+    title: "Proses Avtomatlaşdırması",
+    description: "Süni intellekt texnologiyası ilə işləyən ağıllı avtomatlaşdırma ilə əməliyyatları sadələşdirin.",
+    icon: "⚙️"
+  },
+  {
+    title: "Təbii Dil Emalı",
+    description: "Müştəri qarşılıqlı əlaqələrini təkmilləşdirmək üçün söhbət botları və mətn təhlili alətlərini tətbiq edin.",
+    icon: "💬"
+  }
+];
+---
+
+<section id="services" class="services">
+  <div class="container">
+    <div class="section-header">
+      <h2>Xidmətlərimiz</h2>
+      <p>Kiçik və orta bizneslər üçün qabaqcıl süni intellekt həlləri təqdim edirik</p>
+    </div>
+    
+    <div class="services-grid">
+      {services.map(service => (
+        <div class="service-card">
+          <div class="service-icon">{service.icon}</div>
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    padding: 6rem 0;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem; /* Reduced from 2.5rem */
+    margin-bottom: 1rem;
+  }
+  
+  .section-header p {
+    color: #aaa;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 0.9rem; /* Reduced text size */
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+  
+  .service-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .service-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .service-card h3 {
+    font-size: 1.3rem; /* Reduced from 1.5rem */
+    margin-bottom: 1rem;
+  }
+  
+  .service-card p {
+    color: #aaa;
+    font-size: 0.9rem; /* Reduced from 1rem */
+    line-height: 1.6;
+  }
+</style>

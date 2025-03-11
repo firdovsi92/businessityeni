@@ -1,0 +1,227 @@
+---
+---
+
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="section-header">
+      <h2>Bizimlə Əlaqə</h2>
+      <p>Süni intellektin biznesinizi necə dəyişdirə biləcəyini müzakirə etmək üçün əlaqə saxlayın</p>
+    </div>
+    
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="info-item">
+          <h3>E-poçt</h3>
+          <p>firo.memmedli@gmail.com</p>
+        </div>
+        <div class="info-item">
+          <h3>Telefon</h3>
+          <p>+1 (555) 123-4567</p>
+        </div>
+        <div class="info-item">
+          <h3>Ünvan</h3>
+          <p>123 AI Küçəsi, Texnologiya Şəhəri<br>İnnovasiya Dövləti, 12345</p>
+        </div>
+      </div>
+      
+      <div class="contact-form">
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Ad Soyad</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-poçt</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Mesaj</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" id="submitButton" class="btn">Mesaj Göndər</button>
+          <div id="statusMessage" class="status-message"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding: 6rem 0;
+  }
+  
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    margin-top: 3rem;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem; /* Reduced from 2.5rem */
+    margin-bottom: 1rem;
+  }
+  
+  .section-header p {
+    color: #aaa;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 0.9rem; /* Reduced text size */
+  }
+  
+  .info-item {
+    margin-bottom: 2rem;
+  }
+  
+  .info-item h3 {
+    font-size: 1.1rem; /* Reduced from 1.2rem */
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+  }
+  
+  .info-item p {
+    color: #aaa;
+    font-size: 0.9rem; /* Reduced from 1rem */
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem; /* Reduced from 0.9rem */
+    color: #aaa;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: white;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+  
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+  }
+  
+  button {
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+  }
+  
+  .status-message {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    display: none;
+  }
+  
+  .status-message.success {
+    display: block;
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+  }
+  
+  .status-message.error {
+    display: block;
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #F44336;
+    border: 1px solid #F44336;
+  }
+  
+  @media (max-width: 768px) {
+    .contact-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contactForm');
+    const submitButton = document.getElementById('submitButton');
+    const statusMessage = document.getElementById('statusMessage');
+    
+    if (contactForm && submitButton) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Prevent actual form submission
+        
+        // Change button text and disable it
+        submitButton.textContent = 'Göndərilir...';
+        submitButton.disabled = true;
+        
+        try {
+          // Get form data
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const message = document.getElementById('message').value;
+          
+          // Send data to the API endpoint
+          const response = await fetch('/api/send-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, message }),
+          });
+          
+          const result = await response.json();
+          
+          if (result.success) {
+            // Success
+            submitButton.textContent = 'Mesaj Gönderildi';
+            submitButton.style.backgroundColor = '#4CAF50';
+            
+            // Show success message
+            statusMessage.textContent = 'Mesajınız uğurla göndərildi!';
+            statusMessage.className = 'status-message success';
+            
+            // Reset form
+            contactForm.reset();
+          } else {
+            throw new Error(result.message || 'Mesaj göndərilmədi');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          
+          // Show error state
+          submitButton.textContent = 'Xəta';
+          submitButton.style.backgroundColor = '#F44336';
+          
+          // Show error message
+          statusMessage.textContent = 'Mesaj göndərilmədi. Zəhmət olmasa bir az sonra yenidən cəhd edin.';
+          statusMessage.className = 'status-message error';
+        }
+        
+        // Reset button after some time
+        setTimeout(() => {
+          submitButton.textContent = 'Mesaj Göndər';
+          submitButton.disabled = false;
+          submitButton.style.backgroundColor = '';
+          
+          // Hide status message after some time
+          setTimeout(() => {
+            statusMessage.className = 'status-message';
+          }, 5000);
+        }, 5000);
+      });
+    }
+  });
+</script>

@@ -1,0 +1,104 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h3>AI Business IT</h3>
+        <p>Kiçik və orta bizneslər üçün süni intellekt həlləri</p>
+      </div>
+      <div class="footer-links">
+        <div class="link-group">
+          <h4>Şirkət</h4>
+          <ul>
+            <li><a href="#about">Haqqımızda</a></li>
+            <li><a href="#services">Xidmətlər</a></li>
+            <li><a href="#contact">Əlaqə</a></li>
+          </ul>
+        </div>
+        <div class="link-group">
+          <h4>Hüquqi</h4>
+          <ul>
+            <li><a href="#">Məxfilik Siyasəti</a></li>
+            <li><a href="#">Xidmət Şərtləri</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; {currentYear} AI Business IT.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    padding: 4rem 0 2rem;
+    background-color: #0a0a0a;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  
+  .footer-logo h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-logo p {
+    color: #aaa;
+    max-width: 300px;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 4rem;
+  }
+  
+  .link-group h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+  
+  .link-group ul {
+    list-style: none;
+  }
+  
+  .link-group li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .link-group a {
+    color: #aaa;
+  }
+  
+  .link-group a:hover {
+    color: white;
+  }
+  
+  .copyright {
+    padding-top: 2rem;
+    border-top: 1px solid #222;
+    text-align: center;
+    color: #777;
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+    }
+    
+    .footer-links {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>
